@@ -1,0 +1,20 @@
+{
+  "name": "resorce-static",
+  "version": "1.0.0",
+  "description": "静态资源服务器",
+  "main": "src/app.js",
+  "scripts": {
+    "init": "eslint init"
+  },
+  "keywords": [
+    "node",
+    "static",
+    "server"
+  ],
+  "author": "wangyunfeifeifei",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-eslint": "^8.2.1",
+    "eslint": "^4.16.0"
+  }
+}
