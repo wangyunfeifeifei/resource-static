@@ -8,6 +8,8 @@ const readdir = promisify(fs.readdir)
 const config = require('../config/default')
 const mime = require('./mime')
 const compress = require('./compress')
+const range = require('./range')
+const isFresh = require('./cache.js')
 
 const tplPath = path.join(__dirname, '../views/dir.hbs')
 const source = fs.readFileSync(tplPath, 'utf-8')
@@ -20,10 +22,24 @@ module.exports = async function (req, res, filePath) {
       const contentType = mime(filePath)
       res.statusCode = 200
       res.setHeader('Content-Type', contentType)
-      // 通过流的形式返回给客户端
-      let rs = fs.createReadStream(filePath)
+      if (isFresh(stats, req, res)) {
+        res.statusCode = 304
+        res.end()
+        return
+      }
+
+      let rs
+      const {code, start, end} = range(stats.size, req, res)
+      if (code === 200) {
+        // 通过流的形式返回给客户端
+        rs = fs.createReadStream(filePath)
+      } else {
+        // 返回range, 拿到文件部分内容
+        rs = fs.createReadStream(filePath, {start, end})
+      }
+
       if (filePath.match(config.compress)) {
-        // 代码压缩
+        // 文件压缩
         rs = compress(rs, req, rs)
       }
       rs.pipe(res)
