@@ -2,7 +2,8 @@
   "name": "resorce-static",
   "version": "1.0.0",
   "description": "静态资源服务器",
-  "main": "src/app.js",
+  "main": "src/server.js",
+  "bin": "src/start.js",
   "scripts": {
     "init": "eslint init"
   },
