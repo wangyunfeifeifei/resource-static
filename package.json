@@ -1,6 +1,6 @@
 {
   "name": "resource-static",
-  "version": "1.0.1",
+  "version": "1.1.1",
   "description": "静态资源服务器",
   "main": "src/server.js",
   "bin": "src/start.js",
@@ -30,7 +30,6 @@
   "dependencies": {
     "chalk": "^2.4.1",
     "commander": "^2.17.1",
-    "ejs": "^2.6.1",
-    "handlebars": "^4.0.11"
+    "ejs": "^2.6.1"
   }
 }
