@@ -1,6 +1,6 @@
 {
   "name": "resource-static",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "静态资源服务器",
   "main": "src/server.js",
   "bin": "src/start.js",
@@ -13,8 +13,8 @@
     "server"
   ],
   "repository": {
-      "type": "git",
-      "url": "https://github.com/wangyunfeifeifei/resource-static"
+    "type": "git",
+    "url": "https://github.com/wangyunfeifeifei/resource-static"
   },
   "author": "wangyunfeifeifei",
   "license": "MIT",
@@ -29,7 +29,8 @@
   },
   "dependencies": {
     "chalk": "^2.4.1",
-    "handlebars": "^4.0.11",
-    "commander": "^2.17.1"
+    "commander": "^2.17.1",
+    "ejs": "^2.6.1",
+    "handlebars": "^4.0.11"
   }
 }

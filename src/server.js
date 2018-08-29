@@ -2,7 +2,7 @@ const http = require('http')
 const conf = require('./config/default')
 const chalk = require('chalk')
 const path = require('path')
-const route = require('./helper/route')
+const route = require('./comm/controller')
 
 function Server () {
   this.config = conf

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title><%= title %></title>
+  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 50px;
+    }
+    a {
+      display: inline-block;
+      padding: 10px;
+      color: #333;
+      box-sizing: border-box;
+      width: 20%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    a i {
+      margin-right: 8px;
+    }
+  </style>
+</head>
+<body>
+  <a href="."><i class="fa fa-folder-open-o" aria-hidden="true"></i>.</a>
+  <a href=".."><i class="fa fa-folder-open-o" aria-hidden="true"></i>..</a>
+<% files.forEach(function(file) { %>
+  <a href="<%= dir %>/<%= file.file %>"><i class="<%= file.icon %>" aria-hidden="true"></i><%= file.file %></a>
+<% }) %>
+</body>
+</html>

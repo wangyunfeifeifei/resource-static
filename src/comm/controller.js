@@ -1,6 +1,6 @@
 const fs = require('fs')
 const path = require('path')
-const Handlebars = require('handlebars')
+const ejs = require('ejs')
 const {promisify} = require('util')
 
 const stat = promisify(fs.stat)
@@ -11,15 +11,15 @@ const compress = require('./compress')
 const range = require('./range')
 const isFresh = require('./cache.js')
 
-const tplPath = path.join(__dirname, '../views/dir.hbs')
+const tplPath = path.join(__dirname, '../views/dir.ejs')
 const source = fs.readFileSync(tplPath, 'utf-8')
-const template = Handlebars.compile(source.toString())
+const template = ejs.compile(source.toString())
 
 module.exports = async function (req, res, filePath) {
   try {
     const stats = await stat(filePath)
     if (stats.isFile()) {
-      const contentType = mime(filePath)
+      const contentType = mime(filePath).content
       res.statusCode = 200
       res.setHeader('Content-Type', contentType)
       if (isFresh(stats, req, res)) {
@@ -54,13 +54,14 @@ module.exports = async function (req, res, filePath) {
         files: files.map(file => {
           return {
             file,
-            icon: mime(file)
+            icon: mime(path.join(filePath, file)).icon
           }
         })
       }
       res.end(template(data))
     }
   } catch (e) {
+    console.log(e.message)
     res.statusCode = 404
     res.setHeader('Content-Type', 'text/plain')
     res.end(`${filePath} is not a directory or file`)
